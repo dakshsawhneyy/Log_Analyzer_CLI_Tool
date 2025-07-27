@@ -1,0 +1,24 @@
+name: Cost-Estimator-Bot-CI
+
+on: [push]
+
+jobs:
+  # Static Application Security Testing
+  sast_scan:  
+    name: Run Bandit Scan
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    
+    - name: Set Up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Bandit
+      run: pip install bandit
+
+    - name: Bandit Scan
+      run: bandit -r .
